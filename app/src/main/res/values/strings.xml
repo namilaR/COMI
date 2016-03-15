@@ -5,6 +5,7 @@
     <string name="title_activity_sign_up">Sign Up</string>
     <string name="pick_date">Birthday</string>
     <string name="title_activity_password_recovery">Recover My Password</string>
+    <string name="title_activity_main">Home</string>
 
 
 </resources>
