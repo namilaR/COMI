@@ -1,5 +1,6 @@
 package com.example.namilaradith.comi_beta;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -7,6 +8,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
     private int[] icons = {R.drawable.ic_activity,R.drawable.ic_calander,R.drawable.ic_groups,R.drawable.ic_messages};
@@ -48,7 +51,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
     }
 
 
@@ -64,6 +66,8 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.action_settings) {
             return true;
         }
+
+
 
         return super.onOptionsItemSelected(item);
     }
