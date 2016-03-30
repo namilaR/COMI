@@ -21,7 +21,7 @@ public class LoginActivity extends AppCompatActivity {
         Button btnSignIn = (Button)findViewById(R.id.btnSignIn);
         Button btnSignUp = (Button)findViewById(R.id.btnRegister);
 
-        //click event listener to sign up button
+        //click event listener to sign in button
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
