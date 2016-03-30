@@ -3,30 +3,31 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="@color/colorPrimary"
+    android:background="@drawable/green_radial"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.namilaradith.comi_beta.LoginActivity"
-    tools:showIn="@layout/activity_login">
+    >
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="184dp"
+        android:layout_marginTop="225dp"
 
-        >
+        android:id="@+id/relativeLayout"
+        android:layout_alignTop="@+id/imageView"
+        android:layout_alignParentStart="true">
 
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:theme="@style/CustomEditTextStyle"
             android:inputType="textEmailAddress"
             android:ems="10"
             android:id="@+id/txtEmail"
@@ -34,12 +35,13 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_alignParentRight="true"
-            android:hint="email"
+            android:hint="Email"
             android:layout_alignParentEnd="true"/>
 
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:theme="@style/CustomEditTextStyle"
             android:inputType="textPassword"
             android:ems="10"
             android:id="@+id/txtPassword"
@@ -47,7 +49,7 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_alignParentRight="true"
-            android:hint="password"
+            android:hint="Password"
             android:layout_alignParentEnd="true"/>
 
         <Button
@@ -55,22 +57,20 @@
             android:layout_height="wrap_content"
             android:text="Sign In"
             android:id="@+id/btnSignIn"
+            android:theme="@style/CustomButtonStyle"
             android:layout_below="@+id/txtPassword"
-            android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_alignParentRight="true"
+            android:layout_marginTop="22dp"
             android:layout_alignParentEnd="true"/>
 
         <Button
             android:layout_width="wrap_content"
-
             android:layout_height="wrap_content"
             android:text="Create a Account"
+            android:theme="@style/CustomButtonStyle"
             android:id="@+id/btnRegister"
             android:layout_below="@+id/btnSignIn"
-            android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"/>
 
         <TextView
@@ -79,8 +79,17 @@
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="forgot your password ?"
             android:id="@+id/textView"
-            android:layout_marginTop="44dp"
-            android:layout_below="@+id/btnRegister"
-            android:layout_centerHorizontal="true"/>
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="34dp"/>
     </RelativeLayout>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView"
+        android:src="@drawable/comi"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"/>
+
 </RelativeLayout>
