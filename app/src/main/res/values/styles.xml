@@ -34,13 +34,23 @@
         <item name="android:shape">rectangle</item>
     </style>
 
-    <style name="CustomEditTextStyle" parent="@android:style/TextAppearance" >
+    <style name="CustomEditTextStyle" parent="@android:style/TextAppearance">
 
 
         <item name="android:textColor">@color/color_txt</item>
+        <item name="android:textColorHint">@color/colorPrimaryDark</item>
 
     </style>
 
+
+
+    <style name="CustomEditTextStyleCommon" parent="@android:style/TextAppearance">
+
+
+        <item name="android:textColor">@color/color_txt</item>
+        <item name="android:textColorHint">@color/light_gray</item>
+
+    </style>
 
 
 </resources>
