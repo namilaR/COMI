@@ -29,8 +29,20 @@ public class Intrest {
     private HttpURLConnection ser_conn = null;
 
 
-    public String upload_user_shared_intrest(String image,String name,String caption){
 
+
+
+    public String intrest_id = "";
+    public String intrest_name = "";
+    public String intrest_caption = "";
+    public String intrest_type = "";
+    public String intrest_category = "";
+    public String intrest_shared_date = "";
+
+    public String upload_user_shared_intrest(String image,String name,String caption,String Intrest,String Intrest_type,String capacity){
+
+
+        String Ser_Response = "";
 
 
         this.ser_conn = this.SerConObject.get_server_connection_UP();
@@ -43,9 +55,12 @@ public class Intrest {
             urlParameters = "image=" + URLEncoder.encode(image, "UTF-8")
                     + "&method=" + URLEncoder.encode(Server_API_method, "UTF-8")
                     + "&name=" + URLEncoder.encode(name, "UTF-8")
-                    + "&caption=" + URLEncoder.encode(caption, "UTF-8");
+                    + "&caption=" + URLEncoder.encode(caption, "UTF-8")
+                    + "&intrest=" + URLEncoder.encode(Intrest, "UTF-8")
+                    + "&intrest_type=" + URLEncoder.encode(Intrest_type, "UTF-8")
+                    + "&capacity=" + URLEncoder.encode(capacity, "UTF-8");
 
-            String Ser_Response = this.SerConObject.send_POST_HTTP_request(ser_conn, urlParameters);
+            Ser_Response = this.SerConObject.send_POST_HTTP_request(ser_conn, urlParameters);
 
 
             JSONArray jsonArray = new JSONArray((Ser_Response));
@@ -54,12 +69,12 @@ public class Intrest {
             String Response = jsonobject.getString("response");
 
 
-
             return Response;
 
 
 
         }catch(Exception e) {
+
 
             return "error in upload_user_shared_intrest";
         }
@@ -67,6 +82,355 @@ public class Intrest {
 
 
     }
+
+    public int get_all_intrest_details(String int_id){
+
+        String Ser_Response = "";
+        this.ser_conn = this.SerConObject.get_server_connection_UP();
+
+
+        try {
+
+            String urlParameters ;
+            String Server_API_method = "get_all_intrest_details";
+
+            urlParameters = "intrest_id=" + URLEncoder.encode(int_id, "UTF-8")
+                    + "&method=" + URLEncoder.encode(Server_API_method, "UTF-8");
+
+            Ser_Response = this.SerConObject.send_POST_HTTP_request(ser_conn, urlParameters);
+
+
+            JSONArray jsonArray = new JSONArray((Ser_Response));
+
+            JSONObject jsonobject = jsonArray.getJSONObject(0);
+
+            String Response = jsonobject.getString("response");
+
+            if(Response.equals("1")){
+
+
+                JSONObject jsonobject1 = jsonArray.getJSONObject(1);
+                JSONObject jsonobject2 = jsonArray.getJSONObject(2);
+                JSONObject jsonobject3 = jsonArray.getJSONObject(3);
+                JSONObject jsonobject4 = jsonArray.getJSONObject(4);
+                JSONObject jsonobject5 = jsonArray.getJSONObject(5);
+                JSONObject jsonobject6 = jsonArray.getJSONObject(6);
+
+
+                intrest_id = jsonobject1.getString("id");
+                intrest_name = jsonobject2.getString("name");
+                intrest_caption = jsonobject3.getString("caption");
+                intrest_shared_date = jsonobject4.getString("shared_date");
+                intrest_type = jsonobject5.getString("intrest_type");
+                intrest_category = jsonobject6.getString("intrest_category");
+
+
+                return 1;
+            }else{
+
+                return 0;
+            }
+
+
+
+        }catch(Exception e) {
+
+            return -1;
+        }
+
+    }
+
+
+
+
+    public int make_intrest_like(String int_id,String usr_id){
+
+        String Ser_Response = "";
+        this.ser_conn = this.SerConObject.get_server_connection_UP();
+
+
+        try {
+
+            String urlParameters ;
+            String Server_API_method = "make_intrest_like";
+
+            urlParameters = "intrest_id=" + URLEncoder.encode(int_id, "UTF-8")
+                    + "&method=" + URLEncoder.encode(Server_API_method, "UTF-8")
+                    + "&user_id=" + URLEncoder.encode(usr_id, "UTF-8");
+
+            Ser_Response = this.SerConObject.send_POST_HTTP_request(ser_conn, urlParameters);
+
+
+            JSONArray jsonArray = new JSONArray((Ser_Response));
+
+            JSONObject jsonobject = jsonArray.getJSONObject(0);
+
+            String Response = jsonobject.getString("response");
+
+            if(Response.equals("1")){
+
+
+                return 1;
+            }else{
+
+                return 0;
+            }
+
+
+
+        }catch(Exception e) {
+
+            return -1;
+        }
+
+    }
+
+
+
+    public int join_activity_action(String int_id,String usr_id){
+
+        String Ser_Response = "";
+        this.ser_conn = this.SerConObject.get_server_connection_UP();
+
+
+        try {
+
+            String urlParameters ;
+            String Server_API_method = "join_activity_action";
+
+            urlParameters = "intrest_id=" + URLEncoder.encode(int_id, "UTF-8")
+                    + "&method=" + URLEncoder.encode(Server_API_method, "UTF-8")
+                    + "&user_id=" + URLEncoder.encode(usr_id, "UTF-8");
+
+            Ser_Response = this.SerConObject.send_POST_HTTP_request(ser_conn, urlParameters);
+
+
+            JSONArray jsonArray = new JSONArray((Ser_Response));
+
+            JSONObject jsonobject = jsonArray.getJSONObject(0);
+
+            String Response = jsonobject.getString("response");
+
+            if(Response.equals("1")){
+
+
+                return 1;
+            }else{
+
+                return 0;
+            }
+
+
+
+        }catch(Exception e) {
+
+            return -1;
+        }
+
+    }
+
+
+    public String get_all_like_count(String int_id){
+
+        String Ser_Response = "";
+        this.ser_conn = this.SerConObject.get_server_connection_UP();
+
+
+        try {
+
+            String urlParameters ;
+            String Server_API_method = "get_like_count";
+
+            urlParameters = "intrest_id=" + URLEncoder.encode(int_id, "UTF-8")
+                    + "&method=" + URLEncoder.encode(Server_API_method, "UTF-8");
+
+            Ser_Response = this.SerConObject.send_POST_HTTP_request(ser_conn, urlParameters);
+
+
+            JSONArray jsonArray = new JSONArray((Ser_Response));
+
+            JSONObject jsonobject = jsonArray.getJSONObject(0);
+
+            String Response = jsonobject.getString("response");
+
+
+            if(Response.equals("1")){
+
+                String count = jsonobject.getString("likecount");
+                return count;
+
+
+            }else{
+
+                return "-1";
+            }
+
+
+
+        }catch(Exception e) {
+
+            return "-2";
+        }
+
+    }
+
+
+
+
+    public String get_intrest_type(String int_id){
+
+        String Ser_Response = "";
+        this.ser_conn = this.SerConObject.get_server_connection_UP();
+
+
+        try {
+
+            String urlParameters ;
+            String Server_API_method = "get_intrest_type";
+
+            urlParameters = "intrest_id=" + URLEncoder.encode(int_id, "UTF-8")
+                    + "&method=" + URLEncoder.encode(Server_API_method, "UTF-8");
+
+            Ser_Response = this.SerConObject.send_POST_HTTP_request(ser_conn, urlParameters);
+
+
+            JSONArray jsonArray = new JSONArray((Ser_Response));
+
+            JSONObject jsonobject = jsonArray.getJSONObject(0);
+
+            String Response = jsonobject.getString("response");
+
+
+            if(Response.equals("1")){
+
+                String type = jsonobject.getString("type");
+                return type;
+
+
+            }else{
+
+                return "-1";
+            }
+
+
+
+        }catch(Exception e) {
+
+            return "-2";
+        }
+
+    }
+
+
+    public String get_like_status(String int_id,String username){
+
+        String Ser_Response = "";
+        this.ser_conn = this.SerConObject.get_server_connection_UP();
+
+
+        try {
+
+            String urlParameters ;
+            String Server_API_method = "get_like_status";
+
+            urlParameters = "intrest_id=" + URLEncoder.encode(int_id, "UTF-8")
+                    + "&method=" + URLEncoder.encode(Server_API_method, "UTF-8")
+                    + "&username=" + URLEncoder.encode(username, "UTF-8");
+
+            Ser_Response = this.SerConObject.send_POST_HTTP_request(ser_conn, urlParameters);
+
+
+            JSONArray jsonArray = new JSONArray((Ser_Response));
+
+            JSONObject jsonobject = jsonArray.getJSONObject(0);
+
+            String Response = jsonobject.getString("response");
+
+
+            if(Response.equals("1")){
+
+                String status = jsonobject.getString("status");
+                return status;
+
+
+            }
+            if(Response.equals("0")){
+
+                String status = jsonobject.getString("status");
+                return status;
+
+
+            }
+            else{
+
+                return "-1";
+            }
+
+
+
+        }catch(Exception e) {
+
+            return "-2";
+        }
+
+    }
+
+
+
+    public String get_join_status(String int_id,String username){
+
+        String Ser_Response = "";
+        this.ser_conn = this.SerConObject.get_server_connection_UP();
+
+
+        try {
+
+            String urlParameters ;
+            String Server_API_method = "get_join_status";
+
+            urlParameters = "intrest_id=" + URLEncoder.encode(int_id, "UTF-8")
+                    + "&method=" + URLEncoder.encode(Server_API_method, "UTF-8")
+                    + "&username=" + URLEncoder.encode(username, "UTF-8");
+
+            Ser_Response = this.SerConObject.send_POST_HTTP_request(ser_conn, urlParameters);
+
+
+            JSONArray jsonArray = new JSONArray((Ser_Response));
+
+            JSONObject jsonobject = jsonArray.getJSONObject(0);
+
+            String Response = jsonobject.getString("response");
+
+
+            if(Response.equals("1")){
+
+                String status = jsonobject.getString("status");
+                return status;
+
+
+            }
+            if(Response.equals("0")){
+
+                String status = jsonobject.getString("status");
+                return status;
+
+
+            }
+            else{
+
+                return "-1";
+            }
+
+
+
+        }catch(Exception e) {
+
+            return "-2";
+        }
+
+    }
+
+
     public String sendGetRequest(String uri) {
         try {
             URL url = new URL(uri);

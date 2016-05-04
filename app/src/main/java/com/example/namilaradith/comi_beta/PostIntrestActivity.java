@@ -10,9 +10,13 @@ import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
@@ -47,6 +51,11 @@ public class PostIntrestActivity extends AppCompatActivity implements View.OnCli
 
     private Uri filePath;
 
+
+    private Spinner selected_intrest_type;
+    private Spinner selected_intrest;
+    private TextView capacity;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,7 +63,9 @@ public class PostIntrestActivity extends AppCompatActivity implements View.OnCli
 
         buttonChoose = (Button) findViewById(R.id.buttonChoose);
         buttonUpload = (Button) findViewById(R.id.buttonUpload);
-        buttonView = (Button) findViewById(R.id.buttonViewImage);
+        capacity = (TextView) findViewById(R.id.max_capacity);
+
+
 
         imageView = (ImageView) findViewById(R.id.imageView);
 
@@ -63,8 +74,49 @@ public class PostIntrestActivity extends AppCompatActivity implements View.OnCli
 
         buttonChoose.setOnClickListener(this);
         buttonUpload.setOnClickListener(this);
-        buttonView.setOnClickListener(this);
+
+
+        Spinner intrest_sp = (Spinner) findViewById(R.id.intrest_spinner);
+        Spinner intrest_type_sp = (Spinner) findViewById(R.id.intrest_type_spinner);
+
+        ArrayAdapter<CharSequence> intrest_sp_adapter = ArrayAdapter.createFromResource(this,
+                R.array.Intrests_array, android.R.layout.simple_spinner_item);
+
+
+        ArrayAdapter<CharSequence> intrest_type_sp_adapter = ArrayAdapter.createFromResource(this,
+                R.array.Intrests_type_array, android.R.layout.simple_spinner_item);
+
+
+        intrest_sp_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        intrest_type_sp_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        intrest_sp.setAdapter(intrest_sp_adapter);
+
+        intrest_type_sp.setAdapter(intrest_type_sp_adapter);
+
+        intrest_type_sp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                if(position == 0) {
+                    capacity.setVisibility(View.INVISIBLE);
+                }
+                else if(position == 1){
+                    capacity.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                capacity.setVisibility(View.INVISIBLE);
+            }
+
+        });
+
     }
+
+
+
 
     private void showFileChooser() {
         Intent intent = new Intent();
@@ -108,6 +160,27 @@ public class PostIntrestActivity extends AppCompatActivity implements View.OnCli
         String IntrestCaption = Intrest_caption.getText().toString();
         return IntrestCaption;
     }
+
+    public String get_selected_intrest_type(){
+
+        selected_intrest_type = (Spinner)findViewById(R.id.intrest_type_spinner);
+        String type = selected_intrest_type.getSelectedItem().toString();
+        return type;
+    }
+
+    public String get_capacity(){
+
+        String type = capacity.getText().toString();
+        return type;
+    }
+
+    public String get_selected_intrest(){
+
+
+        selected_intrest = (Spinner)findViewById(R.id.intrest_spinner);
+        String intrest = selected_intrest.getSelectedItem().toString();
+        return intrest;
+    }
     private void uploadImage(){
 
 
@@ -147,7 +220,12 @@ public class PostIntrestActivity extends AppCompatActivity implements View.OnCli
                 String Intrestname = getIntrestName();
                 String IntrestCaption = getIntrestcaption();
 
-                String result = user_intrest.upload_user_shared_intrest(uploadImage,Intrestname,IntrestCaption);
+                String sel_int_type = get_selected_intrest_type();
+                String sel_int =  get_selected_intrest();
+
+                String capacity = get_capacity();
+
+                String result = user_intrest.upload_user_shared_intrest(uploadImage,Intrestname,IntrestCaption,sel_int,sel_int_type,capacity);
                 return result;
             }
         }
@@ -172,6 +250,9 @@ public class PostIntrestActivity extends AppCompatActivity implements View.OnCli
     private void viewImage() {
         startActivity(new Intent(this, PostIntrestActivity.class));
     }
+
+
+
 
 
 }

@@ -17,28 +17,27 @@ import com.android.volley.toolbox.NetworkImageView;
 
 import java.util.ArrayList;
 
-/**
- * Created by Belal on 12/22/2015.
- */
 public class GridViewAdapter extends BaseAdapter {
 
-    //Imageloader to load images
+
     private ImageLoader imageLoader;
 
-    //Context
+
     private Context context;
 
-    //Array List that would contain the urls and the titles for the images
+
     private ArrayList<String> images;
     private ArrayList<String> names;
     private ArrayList<String> ids;
+    private ArrayList<String> captions;
 
-    public GridViewAdapter (Context context, ArrayList<String> images, ArrayList<String> names,ArrayList<String> ids){
-        //Getting all the values
+    public GridViewAdapter (Context context, ArrayList<String> images, ArrayList<String> names,ArrayList<String> ids,ArrayList<String> captions){
+
         this.context = context;
         this.images = images;
         this.names = names;
         this.ids = ids;
+        this.captions = captions;
 
     }
 
@@ -64,37 +63,52 @@ public class GridViewAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        //Creating a linear layout
+
         LinearLayout linearLayout = new LinearLayout(context);
         linearLayout.setOrientation(LinearLayout.VERTICAL);
 
-        //NetworkImageView
+
         NetworkImageView networkImageView = new NetworkImageView(context);
 
-        //Initializing ImageLoader
+
         imageLoader = CustomVolleyRequest.getInstance(context).getImageLoader();
         imageLoader.get(images.get(position), ImageLoader.getImageListener(networkImageView, R.mipmap.ic_launcher, android.R.drawable.ic_dialog_alert));
 
 
 
 
-        //Setting the image url to load
         networkImageView.setImageUrl(images.get(position), imageLoader);
+
+
+        //Splitting String
+
+
+        String retval[] = names.get(position).split("\\^", 2);
+
+        String name = retval[0];
+        String caption = retval[1];
+
+
 
         //Creating a textview to show the title
         TextView textView = new TextView(context);
-        textView.setText(names.get(position));
+        textView.setText(name);
+
+        //Creating a textview to show the title
+        TextView CaptiontextView = new TextView(context);
+        CaptiontextView.setText(caption);
 
 
         //Scaling the imageview
         networkImageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        networkImageView.setLayoutParams(new GridView.LayoutParams(200,200));
+        networkImageView.setLayoutParams(new GridView.LayoutParams(200, 200));
 
         //Adding views to the layout
         linearLayout.addView(textView);
         linearLayout.addView(networkImageView);
+        linearLayout.addView(CaptiontextView);
 
-        //Returnint the layout
+
         return linearLayout;
     }
 

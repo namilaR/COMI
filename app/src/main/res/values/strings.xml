@@ -27,7 +27,27 @@
     <!-- Intrest Sharing Activity-->
     <string name="title_activity_new_intrest">New Intrest</string>
     <string name="string_choose_file">Choose File</string>
-    <string name="string_upload_image">Upload Image</string>
+    <string name="string_upload_image">Upload Intrest</string>
     <string name="string_view_image">View Image</string>
+
+    <string-array name="Intrests_array">
+        <item>Technology</item>
+        <item>Mens Style</item>
+        <item>Travel</item>
+        <item>Sports</item>
+        <item>Concept Cars</item>
+        <item>Space</item>
+        <item>Animals</item>
+        <item>Landscaping</item>
+    </string-array>
+
+    <string-array name="Intrests_type_array">
+        <item>Intrest</item>
+        <item>Activity</item>
+    </string-array>
+
     <!-- END Intrest Sharing Activity -->
+
+
+
 </resources>
