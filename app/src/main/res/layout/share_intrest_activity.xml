@@ -8,72 +8,89 @@
     android:weightSum="1">
 
 
-    <EditText
+    <TableLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textEmailAddress"
-        android:ems="10"
-        android:id="@+id/IntrestName"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
-        android:hint="Name"
-        android:layout_alignParentEnd="true"/>
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textEmailAddress"
-        android:ems="10"
-        android:id="@+id/IntrestCaption"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
-        android:hint="Caption"
-        android:layout_alignParentEnd="true" />
+        android:layout_height="match_parent">
 
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+            android:ems="10"
+            android:id="@+id/IntrestName"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentRight="true"
+            android:hint="Name"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="10dp"
+            />
 
-    <Spinner
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:id="@+id/intrest_type_spinner" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+            android:ems="10"
+            android:id="@+id/IntrestCaption"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentRight="true"
+            android:hint="Caption"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="10dp"/>
 
-    <Spinner
-        android:layout_width="wrap_content"
-        android:layout_height="42dp"
-        android:id="@+id/intrest_spinner" />
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:id="@+id/intrest_type_spinner"
+            android:layout_marginTop="10dp"/>
 
-    <EditText
-        android:layout_width="290dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/max_capacity"
-        android:editable="true"
-        android:hint="Capacity" />
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="42dp"
+            android:id="@+id/intrest_spinner"
+            android:layout_marginTop="10dp"/>
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="157dp"
-        android:id="@+id/imageView"
-        android:layout_weight="0.33" />
+        <EditText
+            android:layout_width="290dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/max_capacity"
+            android:editable="true"
+            android:hint="Capacity"
+            android:layout_marginTop="10dp"/>
 
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/string_choose_file"
-        android:id="@+id/buttonChoose"
-        android:background="#b50f0f"
-        android:textColor="#ffffff" />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="157dp"
+                android:id="@+id/imageView"
+                android:layout_weight="0.33" />
 
-    <Button
-        android:layout_width="155dp"
-        android:layout_height="wrap_content"
-        android:text="@string/string_upload_image"
-        android:id="@+id/buttonUpload"
-        android:textColor="#ffffff"
-        android:background="#ce0000"
-        />
+        </TableRow>
+
+        <Button
+            android:layout_width="25dp"
+            android:layout_height="wrap_content"
+            android:text="@string/string_choose_file"
+            android:id="@+id/buttonChoose"
+            android:background="#454141"
+            android:textColor="#ffffff"
+            android:layout_column="39"/>
+
+        <Button
+            android:layout_width="155dp"
+            android:layout_height="wrap_content"
+            android:text="@string/string_upload_image"
+            android:id="@+id/buttonUpload"
+            android:textColor="#ffffff"
+            android:background="#ce0000"
+            android:layout_marginTop="10dp"/>
+    </TableLayout>
 
 
 </LinearLayout>
