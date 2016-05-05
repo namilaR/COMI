@@ -141,6 +141,8 @@ public class PostIntrestActivity extends AppCompatActivity implements View.OnCli
         }
     }
 
+
+
     public String getStringImage(Bitmap bmp){
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);
@@ -182,9 +184,6 @@ public class PostIntrestActivity extends AppCompatActivity implements View.OnCli
         return intrest;
     }
     private void uploadImage(){
-
-
-
 
         class UploadImage extends AsyncTask<Bitmap,Void,String> {
 
