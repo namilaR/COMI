@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.GridView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -32,46 +33,36 @@ import com.example.namilaradith.comi_beta.GridViewAdapter;
 public class MainActivity extends AppCompatActivity {
     private int[] icons = {R.drawable.ic_activity,R.drawable.ic_calander,R.drawable.ic_groups,R.drawable.ic_messages};
 
-    ///////////////////////////////////////////////////////////////////
-
-
-    //Web api url
     public static final String DATA_URL = "http://192.168.8.101:80/comi_server/?method=get_shared_intrest";
 
-    //Tag values to read from json
+    public static final String DATA_URL_ACTIVITIES = "http://192.168.8.101:80/comi_server/?method=get_shared_activities";
+
     public static final String TAG_IMAGE_URL = "image";
     public static final String TAG_NAME = "name";
     public static final String TAG_ID = "id";
+    public static final String TAG_CAPTION = "caption";
 
-    //GridView Object
     private GridView gridView;
 
-    //ArrayList for Storing image urls and titles
     private ArrayList<String> images;
     private ArrayList<String> names;
     private ArrayList<String> ids;
+    private ArrayList<String> captions;
 
 
     private void getData(){
-        //Showing a progress dialog while our app fetches the data from url
+
         final ProgressDialog loading = ProgressDialog.show(this, "Please wait...","Fetching data...",false,false);
 
-        //Creating a json array request to get the json from our api
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(DATA_URL,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        //Dismissing the progressdialog on response
-                        loading.dismiss();
-
-//                        String s = response.toString();
-//                        final ProgressDialog loading = ProgressDialog.show(MainActivity.this, "Please wait...", s, false, false);
 
 
-
-//
-//                        //Displaying our grid
                         showGrid(response);
+
+                        loading.dismiss();
                     }
                 },
                 new Response.ErrorListener() {
@@ -82,46 +73,62 @@ public class MainActivity extends AppCompatActivity {
                 }
         );
 
-        //Creating a request queue
+                RequestQueue requestQueue = Volley.newRequestQueue(this);
+                requestQueue.add(jsonArrayRequest);
+    }
+
+    private void getDataActivities(){
+
+        final ProgressDialog loading = ProgressDialog.show(this, "Please wait...","Fetching data...",false,false);
+
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(DATA_URL_ACTIVITIES,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+
+
+                        showGrid(response);
+
+                        loading.dismiss();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                }
+        );
+
         RequestQueue requestQueue = Volley.newRequestQueue(this);
-        //Adding our request to the queue
         requestQueue.add(jsonArrayRequest);
     }
 
-
     private void showGrid(JSONArray jsonArray){
 
-        //Looping through all the elements of json array
+
         for(int i = 0; i<jsonArray.length(); i++){
-            //Creating a json object of the current index
+
             JSONObject obj = null;
             try {
 
-                //getting json object from current index
                 obj = jsonArray.getJSONObject(i);
 
-                //getting image url and title from json object
                 images.add(obj.getString(TAG_IMAGE_URL));
                 names.add(obj.getString(TAG_NAME));
-                ids.add(obj.getString(TAG_ID));
+
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         }
-        //Creating GridViewAdapter Object
-        GridViewAdapter gridViewAdapter = new GridViewAdapter(MainActivity.this,images,names,ids);
 
 
-        //Adding adapter to gridview
+        GridViewAdapter gridViewAdapter = new GridViewAdapter(MainActivity.this,images,names,ids,captions);
+
         gridView.setAdapter(gridViewAdapter);
     }
 
-
-
-
-
-
-    /////////////////////////////////////////////////////////////////////////////////////////////////
+///////ONCREATE//////////////////////////////////////////////////////////////////////////////////////
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -132,8 +139,8 @@ public class MainActivity extends AppCompatActivity {
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         tabLayout.addTab(tabLayout.newTab().setText("Intrests").setIcon(icons[0]));
         tabLayout.addTab(tabLayout.newTab().setText("Activities").setIcon(icons[1]));
-        tabLayout.addTab(tabLayout.newTab().setText("Groups").setIcon(icons[2]));
-        tabLayout.addTab(tabLayout.newTab().setText("Messages").setIcon(icons[3]));
+        tabLayout.addTab(tabLayout.newTab().setText("Joined").setIcon(icons[2]));
+        tabLayout.addTab(tabLayout.newTab().setText("My Intrests").setIcon(icons[3]));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
@@ -146,40 +153,78 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
 
+                String selectedTab = tab.getText().toString();
 
-                gridView = (GridView) findViewById(R.id.gridView);
+                        if(selectedTab.equals("Intrests")) {
+                            gridView = (GridView) findViewById(R.id.gridView);
 
-                images = new ArrayList<>();
-                names = new ArrayList<>();
-
-                //Calling the getData method
-                getData();
-
-                viewPager.setCurrentItem(tab.getPosition());
-
-                gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    public void onItemClick(AdapterView<?> parent, View v,
-                                            int position, long id) {
-
-                        StringBuilder sb = new StringBuilder();
-                        sb.append("");
-                        sb.append(images.get(position));
-                        String strI = sb.toString();
-
-//                        FireErroDialogFragment Fr = new FireErroDialogFragment("SADAD");
-//                        final ProgressDialog loading = ProgressDialog.show(MainActivity.this, "Please wait...",strI,false,false);
+                            images = new ArrayList<>();
+                            names = new ArrayList<>();
 
 
-                        Intent goToNextActivity = new Intent(MainActivity.this, SelectedIntrestActivity.class);
-                        goToNextActivity.putExtra("url",strI);
-                        startActivity(goToNextActivity);
-                    }
-                });
+                            getData();
+
+                            viewPager.setCurrentItem(tab.getPosition());
+
+                            gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                public void onItemClick(AdapterView<?> parent, View v,
+                                                        int position, long id) {
+
+                                    StringBuilder sb = new StringBuilder();
+                                    sb.append("");
+                                    sb.append(images.get(position));
+                                    String strI = sb.toString();
+
+                                    Intent goToNextActivity = new Intent(MainActivity.this, SelectedIntrestActivity.class);
+                                    goToNextActivity.putExtra("url", strI);
+                                    startActivity(goToNextActivity);
+                                }
+                            });
+                        }
+                        if(selectedTab.equals("Activities")) {
+                            gridView = (GridView) findViewById(R.id.gridView2);
+
+                            images = new ArrayList<>();
+                            names = new ArrayList<>();
+
+                            getDataActivities();
+
+                            viewPager.setCurrentItem(tab.getPosition());
+
+                            gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                public void onItemClick(AdapterView<?> parent, View v,
+                                                        int position, long id) {
+
+                                    StringBuilder sb = new StringBuilder();
+                                    sb.append("");
+                                    sb.append(images.get(position));
+                                    String strI = sb.toString();
+
+                                    Intent goToNextActivity = new Intent(MainActivity.this, SelectedIntrestActivity.class);
+                                    goToNextActivity.putExtra("url", strI);
+                                    startActivity(goToNextActivity);
+                                }
+                            });
+
+                        }
+
+                if(selectedTab.equals("Joined")) {
+
+                }
+
+                if(selectedTab.equals("My Intrests")) {
+
+                }
 
             }
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
+
+
+
 
             }
 
@@ -194,10 +239,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-
-
-
-
 
 
     @Override

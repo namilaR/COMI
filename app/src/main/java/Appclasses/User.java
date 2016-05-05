@@ -1,4 +1,6 @@
 package Appclasses;
+import com.android.volley.Response;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -12,13 +14,16 @@ import Appclasses.ServerConManager;
  */
 public class User {
 
-    private String username = "";
+    public String username = "";
     private String password = "";
-    private String fname = "";
-    private String lname = "";
-    private String dob = "";
-    private String contact = "";
-    private String email = "";
+    public String fname = "";
+    public String lname = "";
+    public String dob = "";
+    public String contact = "";
+    public String email = "";
+    public String name = "";
+
+    public int flag ;
     private ServerConManager SerConObject = new ServerConManager();
     private HttpURLConnection ser_conn = null;
 
@@ -78,6 +83,10 @@ public class User {
             JSONObject jsonobject = jsonArray.getJSONObject(0);
             String Response = jsonobject.getString("response");
 
+            if(Response.equals("1")){
+                this.email = Email;
+            }
+
             return Response;
 
         }catch(Exception e) {
@@ -85,5 +94,41 @@ public class User {
             return "error in login";
         }
     }
+
+    public String get_all_user_details(String Email){
+
+
+        this.ser_conn = this.SerConObject.get_server_connection_UP();
+
+        try {
+
+            String urlParameters ;
+            String Server_API_method = "get_all_user_details";
+
+            urlParameters = "Email=" + URLEncoder.encode(Email, "UTF-8")
+                    + "&method=" + URLEncoder.encode(Server_API_method, "UTF-8");
+
+            String Ser_Response = this.SerConObject.send_POST_HTTP_request(ser_conn, urlParameters);
+
+
+            JSONArray jsonArray = new JSONArray((Ser_Response));
+            JSONObject jsonobject = jsonArray.getJSONObject(0);
+            String Response = jsonobject.getString("response");
+
+            if(Response.equals("1")) {
+                this.name = jsonobject.getString("name");
+                this.email = jsonobject.getString("email");
+                this.username = jsonobject.getString("username");
+                this.contact = jsonobject.getString("contact");
+                this.dob = jsonobject.getString("dob");
+            }
+            return Response;
+
+        }catch(Exception e) {
+
+            return "error in get_all_user_details";
+        }
+    }
+
 
 }

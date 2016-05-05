@@ -1,6 +1,8 @@
 package com.example.namilaradith.comi_beta;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.design.widget.FloatingActionButton;
@@ -16,6 +18,8 @@ import android.widget.EditText;
 import Appclasses.FireMissilesDialogFragment;
 import Appclasses.User;
 import Appclasses.FireErroDialogFragment;
+import Appclasses.ComiDB;
+
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -80,8 +84,41 @@ public class LoginActivity extends AppCompatActivity {
 
         String Message = "";
         if (x == 1) {
-            Message = "Welcome";
+
+            ComiDB COMIDBhelper = new ComiDB(LoginActivity.this);
+            COMIDBhelper.resetUserTbl();
+            String response = user.get_all_user_details(emailString);
+
+            String temp_name ;
+            String temp_contact ;
+            String temp_dob;
+            String temp_email ;
+            String temp_username ;
+
+
+
+            if(response.equals("1")){
+
+                temp_name = user.name;
+                temp_contact = user.contact;
+                temp_dob = user.dob;
+                temp_email = user.email;
+                temp_username = user.username;
+
+                COMIDBhelper.resetUserTbl();
+                COMIDBhelper.insertuser(temp_name,temp_contact,temp_email,"srilanka",temp_username,1);
+
+
+            }
+
+            Cursor c = COMIDBhelper.getAllData(1);
+            c.moveToFirst();
+
+            Message = "Welcome ";
+            Message = Message.concat(c.getString(1));
             this.confirmFireMissiles(Message);
+
+
         } else {
 
             if (x == -2 || x == 0) {
