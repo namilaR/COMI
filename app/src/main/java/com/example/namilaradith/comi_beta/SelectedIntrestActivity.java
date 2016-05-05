@@ -90,8 +90,17 @@ public class SelectedIntrestActivity extends AppCompatActivity {
 
     public void make_like(){
 
+        //http://192.168.8.100/comi_server/?method=get_selected_image&id=
+        String standardStringurl = "http://192.168.8.100/comi_server/?method=get_selected_image&id=";
+
+
+
+
         String temp = this.ImageUrl;
-        String intrest_id =  temp.substring(temp.length() - 1);
+
+
+        int diff = temp.length() - standardStringurl.length();
+        String intrest_id =  temp.substring(temp.length() - diff);
 
         ComiDB COMIDBhelper = new ComiDB(SelectedIntrestActivity.this);
         Cursor c = COMIDBhelper.getAllData(1);
@@ -115,8 +124,13 @@ public class SelectedIntrestActivity extends AppCompatActivity {
 
     public void join_activity_action(){
 
+        //http://192.168.8.100/comi_server/?method=get_selected_image&id=
+        String standardStringurl = "http://192.168.8.100/comi_server/?method=get_selected_image&id=";
+
         String temp = this.ImageUrl;
-        String intrest_id =  temp.substring(temp.length() - 1);
+
+        int diff = temp.length() - standardStringurl.length();
+        String intrest_id =  temp.substring(temp.length() - diff);
 
         ComiDB COMIDBhelper = new ComiDB(SelectedIntrestActivity.this);
         Cursor c = COMIDBhelper.getAllData(1);
@@ -135,9 +149,15 @@ public class SelectedIntrestActivity extends AppCompatActivity {
     }
 
     public String get_intrest_like_count() {
+        //http://192.168.8.100/comi_server/?method=get_selected_image&id=
+        String standardStringurl = "http://192.168.8.100/comi_server/?method=get_selected_image&id=";
 
         String temp = this.ImageUrl;
-        String intrest_id = temp.substring(temp.length() - 1);
+
+
+        int diff = temp.length() - standardStringurl.length();
+        String intrest_id =  temp.substring(temp.length() - diff);
+
         String response = I.get_all_like_count(intrest_id);
 
 
@@ -157,8 +177,17 @@ public class SelectedIntrestActivity extends AppCompatActivity {
 
     public void get_intrest_type() {
 
+        //http://192.168.8.100/comi_server/?method=get_selected_image&id=
+        String standardStringurl = "http://192.168.8.100/comi_server/?method=get_selected_image&id=";
+
+
+
+
         String temp = this.ImageUrl;
-        String intrest_id = temp.substring(temp.length() - 1);
+
+
+        int diff = temp.length() - standardStringurl.length();
+        String intrest_id =  temp.substring(temp.length() - diff);
         String response = I.get_intrest_type(intrest_id);
 
 
@@ -189,9 +218,17 @@ public class SelectedIntrestActivity extends AppCompatActivity {
     }
 
     public void get_join_status() {
+        //http://192.168.8.100/comi_server/?method=get_selected_image&id=
+        String standardStringurl = "http://192.168.8.100/comi_server/?method=get_selected_image&id=";
+
+
+
 
         String temp = this.ImageUrl;
-        String intrest_id =  temp.substring(temp.length() - 1);
+
+
+        int diff = temp.length() - standardStringurl.length();
+        String intrest_id =  temp.substring(temp.length() - diff);
 
         ComiDB COMIDBhelper = new ComiDB(SelectedIntrestActivity.this);
         Cursor c = COMIDBhelper.getAllData(1);
@@ -221,8 +258,17 @@ public class SelectedIntrestActivity extends AppCompatActivity {
 
     public void get_like_status() {
 
+        //http://192.168.8.100/comi_server/?method=get_selected_image&id=
+        String standardStringurl = "http://192.168.8.100/comi_server/?method=get_selected_image&id=";
+
+
+
+
         String temp = this.ImageUrl;
-        String intrest_id =  temp.substring(temp.length() - 1);
+
+
+        int diff = temp.length() - standardStringurl.length();
+        String intrest_id =  temp.substring(temp.length() - diff);
 
         ComiDB COMIDBhelper = new ComiDB(SelectedIntrestActivity.this);
         Cursor c = COMIDBhelper.getAllData(1);

@@ -20,7 +20,7 @@ import android.widget.TextView;
 
 public class ServerConManager {
 
-    private String ServerURL = "http://192.168.8.101:80/comi_server/?";
+    private String ServerURL = "http://192.168.8.100:80/comi_server/?";
     private HttpURLConnection connection = null;
     /**
      * function get_server_connection_UP

@@ -28,7 +28,7 @@ import Appclasses.Intrest;
  */
 public class PostIntrestActivity extends AppCompatActivity implements View.OnClickListener {
 
-    public static final String UPLOAD_URL = "http://192.168.8.102:80/comi_server/upload_img_page.php";
+    public static final String UPLOAD_URL = "http://192.168.8.100:80/comi_server/upload_img_page.php";
     public static final String UPLOAD_KEY = "image";
     public static final String TAG = "MY MESSAGE";
     public Intrest user_intrest = null;
@@ -141,6 +141,8 @@ public class PostIntrestActivity extends AppCompatActivity implements View.OnCli
         }
     }
 
+
+
     public String getStringImage(Bitmap bmp){
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);
@@ -182,9 +184,6 @@ public class PostIntrestActivity extends AppCompatActivity implements View.OnCli
         return intrest;
     }
     private void uploadImage(){
-
-
-
 
         class UploadImage extends AsyncTask<Bitmap,Void,String> {
 
