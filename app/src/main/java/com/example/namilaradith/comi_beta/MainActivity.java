@@ -33,9 +33,9 @@ import com.example.namilaradith.comi_beta.GridViewAdapter;
 public class MainActivity extends AppCompatActivity {
     private int[] icons = {R.drawable.ic_activity,R.drawable.ic_calander,R.drawable.ic_groups,R.drawable.ic_messages};
 
-    public static final String DATA_URL = "http://192.168.8.101:80/comi_server/?method=get_shared_intrest";
+    public static final String DATA_URL = "http://192.168.8.100:80/comi_server/?method=get_shared_intrest";
 
-    public static final String DATA_URL_ACTIVITIES = "http://192.168.8.101:80/comi_server/?method=get_shared_activities";
+    public static final String DATA_URL_ACTIVITIES = "http://192.168.8.100:80/comi_server/?method=get_shared_activities";
 
     public static final String TAG_IMAGE_URL = "image";
     public static final String TAG_NAME = "name";

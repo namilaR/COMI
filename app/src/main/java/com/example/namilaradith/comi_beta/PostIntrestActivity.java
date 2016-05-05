@@ -28,7 +28,7 @@ import Appclasses.Intrest;
  */
 public class PostIntrestActivity extends AppCompatActivity implements View.OnClickListener {
 
-    public static final String UPLOAD_URL = "http://192.168.8.102:80/comi_server/upload_img_page.php";
+    public static final String UPLOAD_URL = "http://192.168.8.100:80/comi_server/upload_img_page.php";
     public static final String UPLOAD_KEY = "image";
     public static final String TAG = "MY MESSAGE";
     public Intrest user_intrest = null;

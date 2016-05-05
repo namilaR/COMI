@@ -12,17 +12,15 @@
     android:background="@color/colorPrimary"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.namilaradith.comi_beta.LoginActivity"
-    tools:showIn="@layout/activity_login">
+    >
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="184dp"
 
-        >
+        android:layout_marginTop="301dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true">
 
         <EditText
             android:layout_width="wrap_content"
@@ -81,8 +79,16 @@
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="forgot your password ?"
             android:id="@+id/textView"
-            android:layout_marginTop="44dp"
             android:layout_below="@+id/btnRegister"
             android:layout_centerHorizontal="true"/>
     </RelativeLayout>
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:id="@+id/imageView3"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="132dp"
+        android:background="@drawable/comi_logo"/>
 </RelativeLayout>
