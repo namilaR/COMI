@@ -72,7 +72,8 @@
         android:text="@string/string_upload_image"
         android:id="@+id/buttonUpload"
         android:textColor="#ffffff"
-        android:background="#ce0000" />
+        android:background="#ce0000"
+        />
 
 
 </LinearLayout>
